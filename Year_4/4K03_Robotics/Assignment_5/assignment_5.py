@@ -45,12 +45,23 @@ def calculate_torques(theta1,theta2,theta3,a1,a2,a3,m1,m2,m3,fWorld):
     latex_print2d(gravity)
     return jacobiTrans.dot(fWorld) + gravity
 
-def calculate_force_output(theta1,theta2,theta3,a1,a2,a3,m1,m2,m3,fWorld):
+def calculate_force_output(theta1,theta2,theta3,a1,a2,a3,m1,m2,m3,torques):
     theta12 = theta1 + theta2
     theta123 = theta1 + theta2 + theta3
 
     jacobi = calculate_jacobi(theta1,theta2,theta3,theta12,theta123,a1,a2,a3)
-    jacobiInv = inv(jacobi)
+    jacobiTrans = transpose(jacobi)
+    jacobiTransInv = inv(jacobiTrans)
+    gravity = calculate_gravity(theta1,theta2,theta3,theta12,theta123,a1,a2,a3,m1,m2,m3)
+    print("Part B Jacobian is:")
+    latex_print2d(jacobi)
+    print("Part B Jacobian transpose is:")
+    latex_print2d(jacobiTrans)
+    print("Part B Jacobian transpose inverse is:")
+    latex_print2d(jacobiTransInv)
+    print("Part B Gravity terms is:")
+    latex_print2d(gravity)
+    return jacobiTransInv.dot(torques-gravity)
 
 def main():
     a1 = 0.5
@@ -74,9 +85,16 @@ def main():
 
     ##### PART B #####
     resolution = 0.1
+    torques = array(([resolution],[resolution],[resolution]))
     # First configuration is same thetas as part A
     theta1B = radians(45.0)
     theta2B = radians(-5.0)
     theta3B = radians(-40.0)
+    forcesA = calculate_force_output(theta1A,theta2A,theta3A,a1,a2,a3,m1,m2,m3,torques)
+    forcesB = calculate_force_output(theta1B,theta2B,theta3B,a1,a2,a3,m1,m2,m3,torques)
+    print("Part B configuration A forces are:")
+    latex_print2d(forcesA)
+    print("Part B configuration B forces are:")
+    latex_print2d(forcesB)
 
 main()
