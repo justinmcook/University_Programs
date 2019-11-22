@@ -53,17 +53,17 @@ def calculate_force_output(theta1,theta2,theta3,a1,a2,a3,m1,m2,m3,fWorld):
     jacobiInv = inv(jacobi)
 
 def main():
-    a1 = -0.5
-    a2 = -0.5
-    a3 = -0.1
-    m1 = -10.0
-    m2 = -10.0
-    m3 = -2.0
+    a1 = 0.5
+    a2 = 0.5
+    a3 = 0.1
+    m1 = 10.0
+    m2 = 10.0
+    m3 = 2.0
     mPayload = 5.0
 
     ##### PART A #####
     theta1A = radians(45.0)
-    theta2A = radians(75.0)
+    theta2A = radians(-75.0)
     theta3A = radians(30.0)
     fWorldA = array([[0],[mPayload*g],[0]])
     # Find the torques
