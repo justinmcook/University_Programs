@@ -3,7 +3,7 @@ from numpy.linalg import inv
 from numpy import array, transpose
 
 # gravity
-g = -9.81
+g = 9.81
 
 def latex_print1d(matrix):
     for i in range(matrix.shape[0]-1):
